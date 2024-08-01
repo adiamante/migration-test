@@ -10,9 +10,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run test database
-        run: |
-          docker-compose up --no-start
-          docker-compose up postgres -d
+        run: docker-compose up --no-start && docker-compose up postgres -d
       - name: Run migration on test database
         run: docker-compose up flyway --exit-code-from flyway
       - name: Run unit tests
