@@ -2,8 +2,8 @@
 SET search_path TO dbo, public;
 
 -- Begin the test plan with the number of tests you plan to run
---SELECT plan(4);
-SELECT plan(99999); --test fail
+SELECT plan(4);
+--SELECT plan(99999); --test fail
 
 -- Test if the table 'customers' exists
 SELECT has_table('dbo'::name, 'customers'::name);
