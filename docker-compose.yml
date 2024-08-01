@@ -20,8 +20,6 @@ services:
       retries: 5
 
   flyway:
-      # https://stackoverflow.com/questions/55679155/get-docker-compose-up-to-only-run-certain-containers
-      #profiles: ["flyway"] #exclude from docker-compose up
       environment:
          #- FLYWAY_USER=postgres
          - FLYWAY_USER=postgresekwrje  #test fail migration
@@ -39,7 +37,6 @@ services:
       command: -locations=filesystem:/flyway/sql migrate
 
   pgtap:
-    #profiles: ["pgtap"] #exclude from docker-compose up
     build:
       context: .
       dockerfile: Dockerfile
