@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Migration test
-        run: docker-compose up --abort-on-container-exit --exit-code-from pgtap
+      - name: Run test database
+        run: docker-compose up posgres -d
+      - name: Run migration on test database
+        run: docker-compose up flyway
+      - name: Run unit tests
+        run: docker-compose up pgtap
 
