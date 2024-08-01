@@ -9,8 +9,6 @@ services:
       POSTGRES_PASSWORD: Password@123
     ports:
       - "5432:5432"
-    #volumes:
-    #  - pg_data:/var/lib/postgresql/data
     #https://stackoverflow.com/questions/35069027/docker-wait-for-postgresql-to-be-running
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -49,6 +47,3 @@ services:
       PGTAP_PASSWORD: Password@123
       PG_SCHEMA: dbo
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
-
-#volumes:
-#  pg_data:
