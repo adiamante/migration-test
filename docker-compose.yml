@@ -1,0 +1,54 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Password@123
+    ports:
+      - "5432:5432"
+    #volumes:
+    #  - pg_data:/var/lib/postgresql/data
+    #https://stackoverflow.com/questions/35069027/docker-wait-for-postgresql-to-be-running
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  flyway:
+      environment:
+         - FLYWAY_USER=postgres
+         - FLYWAY_PASSWORD=Password@123
+         - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
+         - FLYWAY_SCHEMAS=flyway,dbo
+         - FLYWAY_GROUP=true
+         - FLYWAY_VALIDATE_MIGRATION_NAMING=true
+      image: flyway/flyway:latest
+      volumes:
+         - ./migration:/flyway/sql
+      depends_on:
+          postgres:
+            condition: service_healthy
+      command: -locations=filesystem:/flyway/sql migrate
+
+  pgtap:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      flyway:
+        condition: service_completed_successfully
+    volumes:
+      - ./tests:/tests
+    environment:
+      PGTAP_DB: testdb
+      PGTAP_USER: postgres
+      PGTAP_PASSWORD: Password@123
+      PG_SCHEMA: dbo
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
+
+#volumes:
+#  pg_data:

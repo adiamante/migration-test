@@ -1,0 +1,12 @@
+FROM postgres:latest
+
+RUN apt-get update && \
+    apt-get install -y postgresql-server-dev-all make gcc git && \
+    git clone https://github.com/theory/pgtap.git && \
+    cd pgtap && \
+    make && \
+    make install && \
+	RUN mkdir -p /usr/share/postgresql/16/extension && \
+    cp sql/pgtap.sql /usr/share/postgresql/16/extension/pgtap.sql && \
+    cp pgtap.control /usr/share/postgresql/16/extension/pgtap.control && \
+    ls -l /usr/share/postgresql/16/extension || ls -l /usr/share/postgresql/extension || ls -l /usr/share/postgresql

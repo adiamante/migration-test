@@ -1,0 +1,1 @@
+DROP FUNCTION flyway.calculate_sum(int,int);
