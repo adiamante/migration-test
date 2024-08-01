@@ -18,7 +18,7 @@ services:
 
   flyway:
       # https://stackoverflow.com/questions/55679155/get-docker-compose-up-to-only-run-certain-containers
-      profiles: ["migration"] #exclude from docekr-compose up
+      profiles: ["migration"] #exclude from docker-compose up
       environment:
          - FLYWAY_USER=postgres
          - FLYWAY_PASSWORD=Password@123
@@ -35,7 +35,7 @@ services:
       command: -locations=filesystem:/flyway/sql migrate
 
   pgtap:
-    profiles: ["tests"] #exclude from docekr-compose up
+    profiles: ["tests"] #exclude from docker-compose up
     build:
       context: .
       dockerfile: Dockerfile
