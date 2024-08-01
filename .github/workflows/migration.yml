@@ -14,9 +14,9 @@ jobs:
       - name: Run test database
         run: docker-compose up -d postgres
       - name: Run migration on test database
-        run: docker-compose up flyway --exit-code-from flyway
+        run: docker-compose up --exit-code-from flyway flyway
       - name: Run unit tests
-        run: docker-compose up pgtap --exit-code-from pgtap
+        run: docker-compose up --exit-code-from pgtap pgtap
 
       #- name: Run test database
       #  run: docker-compose up --abort-on-container-failure

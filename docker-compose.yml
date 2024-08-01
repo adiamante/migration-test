@@ -48,7 +48,7 @@ services:
     #        condition: service_healthy
     #depends_on:
     #  flyway:
-    #    condition: service_completed_successfully
+    #    condition: service_completed_successfully    #this gets stuck on github actions and docker-compose up --no-action
     volumes:
       - ./tests:/tests
     environment:
