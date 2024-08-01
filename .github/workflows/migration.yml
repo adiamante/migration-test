@@ -12,7 +12,7 @@ jobs:
       - name: Build services
         run: docker-compose up --no-start
       - name: Run test database
-        run: docker-compose up postgres -d
+        run: docker-compose up -d postgres
       - name: Run migration on test database
         run: docker-compose up flyway --exit-code-from flyway
       - name: Run unit tests
