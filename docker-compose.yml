@@ -21,13 +21,13 @@ services:
 
   flyway:
       # https://stackoverflow.com/questions/55679155/get-docker-compose-up-to-only-run-certain-containers
-      profiles: ["flyway"] #exclude from docker-compose up
+      #profiles: ["flyway"] #exclude from docker-compose up
       environment:
          - FLYWAY_USER=postgres
          #- FLYWAY_USER=postgresekwrje
          - FLYWAY_PASSWORD=Password@123
          - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
-         - FLYWAY_SCHEMAS=flyway,dbo
+         - FLYWAY_SCHEMAS=dbo
          - FLYWAY_GROUP=true
          - FLYWAY_VALIDATE_MIGRATION_NAMING=true
       image: flyway/flyway:latest
@@ -39,16 +39,16 @@ services:
       command: -locations=filesystem:/flyway/sql migrate
 
   pgtap:
-    profiles: ["pgtap"] #exclude from docker-compose up
+    #profiles: ["pgtap"] #exclude from docker-compose up
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-          postgres:
-            condition: service_healthy
     #depends_on:
-    #  flyway:
-    #    condition: service_completed_successfully
+    #      postgres:
+    #        condition: service_healthy
+    depends_on:
+      flyway:
+        condition: service_completed_successfully
     volumes:
       - ./tests:/tests
     environment:

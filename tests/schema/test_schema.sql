@@ -1,5 +1,5 @@
--- Load the pgTAP functions
-SET search_path TO pgtap, dbo, public;
+--Required if target is not default schema
+SET search_path TO dbo, public;
 
 -- Begin the test plan with the number of tests you plan to run
 SELECT plan(4);

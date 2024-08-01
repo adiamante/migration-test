@@ -1,4 +1,5 @@
 --CREATE EXTENSION IF NOT EXISTS pgtap;
+SET search_path TO dbo, public;
 
 BEGIN;
 

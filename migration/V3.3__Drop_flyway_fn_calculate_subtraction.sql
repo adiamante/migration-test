@@ -1,1 +1,0 @@
-DROP FUNCTION flyway.calculate_subtraction(int,int);

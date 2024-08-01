@@ -9,9 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run test database
-        run: docker-compose up -d
-      - name: Run migration on test database
-        run: docker-compose --profile flyway up --exit-code-from flyway
-      - name: Run unit tests
-        run: docker-compose --profile pgtap up --exit-code-from pgtap
+        run: docker-compose up --abort-on-container-failure
+      #- name: Run migration on test database
+      #  run: docker-compose up flyway --exit-code-from flyway
+      #- name: Run unit tests
+      #  run: docker-compose up pgtap --exit-code-from pgtap
+        
+      #- name: Run test database
+      #  run: docker-compose --profile postgres up -d
+      #- name: Run migration on test database
+      #  run: docker-compose --profile flyway up --exit-code-from flyway
+      #- name: Run unit tests
+      #  run: docker-compose --profile pgtap up --exit-code-from pgtap
 
