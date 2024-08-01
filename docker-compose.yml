@@ -21,8 +21,8 @@ services:
 
   flyway:
       environment:
-         #- FLYWAY_USER=postgres
-         - FLYWAY_USER=postgresekwrje  #test fail migration
+         - FLYWAY_USER=postgres
+         #- FLYWAY_USER=postgresekwrje  #test fail migration
          - FLYWAY_PASSWORD=Password@123
          - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
          - FLYWAY_SCHEMAS=dbo
