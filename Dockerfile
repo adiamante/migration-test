@@ -1,6 +1,7 @@
 FROM postgres:latest
 
-RUN apt-get update && \
+RUN --mount=type=cache,target=/root/.cache \
+    apt-get update && \
     apt-get install -y perl cpanminus make gcc postgresql-server-dev-all git && \
     git clone https://github.com/theory/pgtap.git && \
     cd pgtap && \
