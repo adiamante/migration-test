@@ -54,3 +54,19 @@ services:
       PGTAP_PASSWORD: Password@123
       PG_SCHEMA: dbo
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
+
+  flyway-deploy:
+      environment:
+         - FLYWAY_USER=postgres
+         - FLYWAY_PASSWORD=Password@123
+         - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
+         - FLYWAY_SCHEMAS=dbo
+         - FLYWAY_GROUP=true
+         - FLYWAY_VALIDATE_MIGRATION_NAMING=true
+      image: flyway/flyway:latest
+      volumes:
+         - ./migration:/flyway/sql
+      depends_on:
+          postgres:
+            condition: service_healthy
+      command: -locations=filesystem:/flyway/sql migrate

@@ -19,6 +19,8 @@ jobs:
         run: docker-compose up --exit-code-from flyway flyway
       - name: Run unit tests
         run: docker-compose up --exit-code-from pgtap pgtap
+      - name: Migrate to real database (not really)
+        run: docker-compose up --exit-code-from flyway-deploy flyway-deploy
 
       #- name: Run test database
       #  run: docker-compose up --abort-on-container-failure
