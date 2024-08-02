@@ -14,13 +14,13 @@ jobs:
       - name: Build services
         run: docker compose up --no-start
       - name: Run test database
-        run: docker-compose up -d postgres
+        run: docker compose up -d postgres
       - name: Run migration on test database
-        run: docker-compose up --exit-code-from flyway flyway
+        run: docker compose up --exit-code-from flyway flyway
       - name: Run unit tests
-        run: docker-compose up --exit-code-from pgtap pgtap
+        run: docker compose up --exit-code-from pgtap pgtap
       - name: Migrate to real database (not really)
-        run: docker-compose up --exit-code-from flyway-deploy flyway-deploy
+        run: docker compose up --exit-code-from flyway-deploy flyway-deploy
 
       #- name: Run test database
       #  run: docker-compose up --abort-on-container-failure

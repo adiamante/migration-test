@@ -13,11 +13,11 @@ services:
     ports:
       - "5432:5432"
     #https://stackoverflow.com/questions/35069027/docker-wait-for-postgresql-to-be-running
-    #healthcheck:
-    #  test: ["CMD-SHELL", "pg_isready -U postgres"]
-    #  interval: 5s
-    #  timeout: 5s
-    #  retries: 5
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   flyway:
       environment:
@@ -31,10 +31,10 @@ services:
       image: flyway/flyway:latest
       volumes:
          - ./migration:/flyway/sql
-      #depends_on:
-      #    postgres:
-      #      condition: service_healthy
-      command: -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+      depends_on:
+          postgres:
+            condition: service_healthy
+      command: -locations=filesystem:/flyway/sql migrate
 
   pgtap:
     build:
@@ -66,4 +66,7 @@ services:
       image: flyway/flyway:latest
       volumes:
          - ./migration:/flyway/sql
-      command: -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+      depends_on:
+          postgres:
+            condition: service_healthy
+      command: -locations=filesystem:/flyway/sql migrate
