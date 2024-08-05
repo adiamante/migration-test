@@ -25,7 +25,7 @@ services:
          #- FLYWAY_USER=postgresekwrje  #test fail migration
          - FLYWAY_PASSWORD=Password@123
          - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
-         - FLYWAY_SCHEMAS=dbo
+         #- FLYWAY_SCHEMAS=dbo
          - FLYWAY_GROUP=true
          - FLYWAY_VALIDATE_MIGRATION_NAMING=true
       image: flyway/flyway:latest
@@ -54,7 +54,7 @@ services:
       PGTAP_DB: testdb
       PGTAP_USER: postgres
       PGTAP_PASSWORD: Password@123
-      PG_SCHEMA: dbo
+      #PG_SCHEMA: dbo
     entrypoint: ["/usr/local/bin/entrypoint.sh"]
 
   flyway-deploy:
@@ -62,7 +62,7 @@ services:
          - FLYWAY_USER=postgres
          - FLYWAY_PASSWORD=Password@123
          - FLYWAY_URL=jdbc:postgresql://postgres:5432/testdb
-         - FLYWAY_SCHEMAS=dbo
+         #- FLYWAY_SCHEMAS=dbo
          - FLYWAY_GROUP=true
          - FLYWAY_VALIDATE_MIGRATION_NAMING=true
       image: flyway/flyway:latest

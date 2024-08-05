@@ -1,5 +1,5 @@
---CREATE EXTENSION IF NOT EXISTS pgtap;
-SET search_path TO dbo, public;
+--Required if target is not default schema
+--SET search_path TO dbo, public;
 
 BEGIN;
 
