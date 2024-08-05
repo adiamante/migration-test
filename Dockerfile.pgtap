@@ -8,7 +8,7 @@ RUN apt-get update && \
     make install && \
     cpanm TAP::Parser::SourceHandler::pgTAP
 
-COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./pgtap_entrypoint.sh /usr/local/bin/entrypoint.sh
 # Debugging step to list directory contents
 RUN ls -l /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
